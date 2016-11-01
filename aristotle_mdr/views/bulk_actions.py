@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 from django.utils.decorators import method_decorator
 import datetime
+import importlib
 
 from aristotle_mdr.perms import user_can_view, user_can_edit, user_can_change_status
 from aristotle_mdr.utils import cache_per_item_user, concept_to_dict, construct_change_message, url_slugify_concept
@@ -124,7 +125,10 @@ def get_bulk_actions():
                 raise registry_exceptions.BadBulkActionModuleName("Bulk action isn't a valid Python module name.")
 
             module, form = form.rsplit('.', 1)
-            exec('from %s import %s as f' % (module, form))
+			
+            # exec('from %s import %s as f' % (module, form))
+            mdl = importlib.import_module(module)
+            f = getattr(mdl, form)
 
             # We need to make this a dictionary, not a class as otherwise
             # the template engire tries to instantiate it.

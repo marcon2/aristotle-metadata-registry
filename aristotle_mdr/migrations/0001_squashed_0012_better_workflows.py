@@ -105,7 +105,7 @@ class Migration(migrations.Migration):
                 ('responsible_organisation', models.CharField(max_length=256, blank=True)),
                 ('derivation_rule', models.TextField(blank=True)),
                 ('derives', models.ForeignKey(related_name='derived_from', blank=True, to='aristotle_mdr.DataElement', null=True)),
-                ('inputs', models.ManyToManyField(related_name='input_to_derivation', to=b'aristotle_mdr.DataElement', blank=True)),
+                ('inputs', models.ManyToManyField(related_name='input_to_derivation', to='aristotle_mdr.DataElement', blank=True)),
                 ('superseded_by', models.ForeignKey(related_name='supersedes', blank=True, to='aristotle_mdr.DataElementDerivation', null=True)),
             ],
             options={
@@ -394,7 +394,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='possumprofile',
             name='favourites',
-            field=models.ManyToManyField(related_name='favourited_by', to=b'aristotle_mdr._concept', blank=True),
+            field=models.ManyToManyField(related_name='favourited_by', to='aristotle_mdr._concept', blank=True),
         ),
         migrations.AddField(
             model_name='possumprofile',
@@ -420,7 +420,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='discussionpost',
             name='relatedItems',
-            field=models.ManyToManyField(related_name='relatedDiscussions', to=b'aristotle_mdr._concept', blank=True),
+            field=models.ManyToManyField(related_name='relatedDiscussions', to='aristotle_mdr._concept', blank=True),
         ),
         migrations.AddField(
             model_name='discussionpost',
@@ -592,7 +592,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='reviewrequest',
             name='concepts',
-            field=models.ManyToManyField(related_name='review_requests', to=b'aristotle_mdr._concept'),
+            field=models.ManyToManyField(related_name='review_requests', to='aristotle_mdr._concept'),
         ),
         migrations.AddField(
             model_name='reviewrequest',
